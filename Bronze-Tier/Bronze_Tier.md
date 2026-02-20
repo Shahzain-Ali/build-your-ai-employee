@@ -1,4 +1,4 @@
-# Hackathon-0: Bronze Tier — Complete Video Guide
+# Hackathon-0: Bronze Tier — Complete Guide
 **Personal AI Employee: Building Autonomous FTEs in 2026**
 
 > **Video Length Target**: 40–60 minutes (Single Video)
@@ -7,8 +7,6 @@
 > **Language**: English (Examples in Roman Urdu)
 
 ---
-
-## VIDEO OUTLINE AT A GLANCE
 
 ### PART 1: THEORY & CONCEPTS
 | Section | Topic |
