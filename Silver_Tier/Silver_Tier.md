@@ -826,7 +826,7 @@ Go through the following sources carefully and analyze what Silver Tier requires
    - Check if Gmail API and Playwright are available
    - Verify Bronze Tier is fully working (pm2 status)
 
-4. Report back:
+4. Report back summary:
    - What Silver Tier officially requires (from PDF)
    - What Bronze already provides (foundation)
    - What new components need to be built
