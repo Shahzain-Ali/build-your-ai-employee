@@ -2569,13 +2569,16 @@ The `fte-facebook` MCP server exposes 5 tools:
 
 **Step 4 — Instagram Permissions Add Karo:**
 
-1. Graph API Explorer mein ye permissions add karo:
+1. Browser mein jao: **developers.facebook.com/tools/explorer/**
+2. **"Meta App"** dropdown mein apna App select karo (e.g., "FTE Social Manager")
+3. **"User or Page"** mein **"Get User Access Token"** select karo
+4. **"Permissions"** mein ye add karo:
    - `instagram_basic`
    - `instagram_content_publish`
    - `instagram_manage_comments`
    - `instagram_manage_insights`
 
-2. **"Generate Access Token"** click karo aur sab allow karo
+5. **"Generate Access Token"** click karo aur sab allow karo
 
 ---
 
