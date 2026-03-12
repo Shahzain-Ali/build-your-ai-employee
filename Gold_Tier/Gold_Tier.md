@@ -2476,34 +2476,58 @@ The `fte-facebook` MCP server exposes 5 tools:
 ### Phase 2: Instagram Ko Facebook Page Se Connect Karna (5 minutes)
 
 > **Important:** Instagram API Facebook ke through kaam karta hai — Page connection zaroori hai.
+>
+> **⚠️ NOTE:** Purane guides mein likha hai "Edit Profile → Page option" — ye ab kaam NAHI karta.
+> 2025+ mein Instagram ne ye option hata diya hai. Ab connection **Meta Accounts Center** se hoti hai.
 
-**Steps:**
-
-1. **Instagram App** open karo
-
-2. **Profile** pe jao → **"Edit Profile"** tap karo
-
-3. **"Page"** option dhundo (Public business information ke under)
-
-4. **"Connect or Create"** tap karo
-
-5. Facebook login karo agar puche
-
-6. Apna **Facebook Page select karo** (e.g., "Agentive Solutions")
-
-7. **"Done"** tap karo
-
-**Verify (Facebook side se):**
+**Method 1 — Meta Accounts Center se (RECOMMENDED — Desktop pe karo):**
 
 1. **Facebook** open karo desktop pe
 
-2. Apna **Page** open karo
+2. Apna **Facebook Page** pe jao (e.g., "Agentive Solutions")
 
-3. **"Settings"** jao
+3. **Page Settings** mein jao
 
-4. **"Linked Accounts"** ya **"Instagram"** click karo
+4. **"Linked Accounts"** ya **"Instagram"** dhundo
 
-5. Instagram account dikhna chahiye connected
+5. **"Connect Account"** click karo
+
+6. Instagram credentials daalo (username + password)
+
+7. **"Connect"** click karo
+
+**Method 2 — Meta Accounts Center Direct:**
+
+1. Browser mein jao: **accountscenter.facebook.com**
+
+2. Ya Facebook → Settings → **"Accounts Center"** (top mein dikhta hai)
+
+3. **"Accounts"** click karo
+
+4. **"Add accounts"** click karo
+
+5. **Instagram** select karo
+
+6. Instagram credentials daalo
+
+7. Connect karo
+
+**Method 3 — Instagram Settings se (Phone pe):**
+
+1. **Instagram App** open karo phone pe
+
+2. **Settings** → **"Accounts Center"** (top mein, Meta logo ke saath)
+
+3. **"Accounts"** tap karo
+
+4. **"Add accounts"** → Facebook add karo
+
+5. Facebook login karo aur Page select karo
+
+**Verify:**
+
+1. **Facebook Page Settings** → **"Linked Accounts"** → Instagram dikhna chahiye
+2. Ya **Graph API Explorer** mein: `{YOUR_PAGE_ID}?fields=instagram_business_account` — agar ID aaye toh connected hai
 
 **Result:** Instagram aur Facebook Page connected.
 
