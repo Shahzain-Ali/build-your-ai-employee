@@ -2584,7 +2584,25 @@ The `fte-facebook` MCP server exposes 5 tools:
 
 ### Phase 4: Instagram Business Account ID Nikalna (5 minutes)
 
-**Steps:**
+**Pehle: Page ID Kahan Se Milegi?**
+
+1. **Business Settings se (RECOMMENDED):**
+   - Browser mein jao: **business.facebook.com/settings/**
+   - Left side mein **"Accounts"** → **"Pages"** click karo
+   - Apna Page select karo → **Page ID** wahan dikhega
+
+2. **Facebook Page URL se:**
+   - Apna Facebook Page kholo browser mein
+   - URL dekho: `facebook.com/profile.php?id=61583573918121`
+   - **⚠️ WARNING:** Ye "New Pages Experience ID" hai — ye API ke liye kaam **NAHI** kar sakta
+   - Business Portfolio Page ID use karo (Method 1 se milegi)
+
+3. **Graph API Explorer se:**
+   - Browser: **developers.facebook.com/tools/explorer/**
+   - GET mode mein likho: `me/accounts`
+   - Submit karo → Response mein Page ka `id` aur `name` dikhega
+
+**Ab Instagram Business Account ID Nikalo:**
 
 1. Graph API Explorer mein **GET** mode mein:
 ```
