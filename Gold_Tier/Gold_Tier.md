@@ -2561,7 +2561,7 @@ The `fte-facebook` MCP server exposes 5 tools:
 
 1. **Instagram App** open karo phone pe
 
-2. **Settings and privacy** → **"Apps and Websites"**
+2. **Settings and privacy** → **website_permissions** → **"Apps and Websites"**
 
 3. **"Tester Invites"** tab mein **"FTE Social Manager-IG"** dikhega
 
