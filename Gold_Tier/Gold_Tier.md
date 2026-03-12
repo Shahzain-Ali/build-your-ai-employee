@@ -158,14 +158,19 @@ GOLD TIER (Personal + Business Connected):
  ```
  Trigger: Client "Ahmed" ne email kiya: "Project ho gaya, 50,000 ka invoice bhejo"
      ↓
- Orchestrator: "Ye invoice request hai, cross-domain workflow start karna hai"
+ Gmail Watcher: Naya email detect kiya → Orchestrator ko bheja
      ↓
- Action 1: Odoo MCP Server → Ahmed ke naam se 50,000 ka invoice create (Business-Finance)
- Action 2: Email MCP Server → Ahmed ko invoice email bhejo (Personal)
- Action 3: WhatsApp MCP → Owner (tumhe) notify karo: "Ahmed ka invoice sent" (Personal)
- Action 4: Audit Log → Poora workflow record karo with workflow_id (System)
+ Orchestrator: "Ye invoice request hai" → Claude Code ko trigger kiya
      ↓
- Done! Har domain ne apna kaam kiya, sab connected hai.
+ Claude Code (AI Brain): Email analyze kiya → samjha ke invoice banana hai
+     → Plan banaya: 4 steps execute karne hain
+     ↓
+ Claude → Action 1: Odoo MCP Server → Ahmed ke naam 50,000 ka invoice create (Business-Finance)
+ Claude → Action 2: Email MCP Server → Ahmed ko invoice email bhejo (Personal)
+ Claude → Action 3: WhatsApp MCP → Owner (tumhe) notify karo: "Ahmed ka invoice sent" (Personal)
+ Claude → Action 4: Audit Log → Poora workflow record karo with workflow_id (System)
+     ↓
+ Done! Claude ne sab decide kiya, MCP servers ne execute kiya.
  ```
 
  ### Workflow Engine
@@ -1428,7 +1433,6 @@ Each MCP server's health is tracked:
 > 4. Stop Hook: "Tasks/ mein aur file hai?" → HAI! → Continue
 > 5. Ali ka meeting TASK → sab steps done → Tasks/Done/ mein
 > 6. Stop Hook: "Tasks/ mein koi file?" → NAHI! → Claude ruk gaya
-`
 
 #### Step 5: Step 1 — Create Odoo Invoice
 
@@ -2204,20 +2208,22 @@ Test each component before moving to next.
 **Solution — App Ko Business Portfolio Se Connect Karo:**
 
 1. Browser mein jao: **business.facebook.com/settings/**
-2. Left side mein **Accounts** → **"Apps"** click karo
-3. **"+ Add"** click karo
-4. Apna **App ID** paste karo (developers.facebook.com → App Dashboard → Settings → Basic se copy karo)
-5. App add ho jayegi
+2. **"Select business"** page khulega — agar multiple Business Portfolios hain toh wo wala select karo jismein Pages hain (e.g., "Bangash110 · 2 Pages · 2 People")
+3. Business Settings khulne ke baad, left side mein **"Accounts"** → **"Apps"** click karo
+4. **"+ Add"** click karo
+5. Apna **App ID** paste karo (developers.facebook.com → App Dashboard → Settings → Basic se copy karo)
+6. App add ho jayegi
 
 **Page Ko App Se Connect Karo:**
 
 1. Left side mein **"Pages"** click karo
-2. Apna **Page** select karo (e.g., "Agentive Solutions")
-3. **"Connected assets"** tab pe jao
-4. **"Connect assets"** click karo
-5. Apna Page select karo
+2. Apna **Page** dikhega (e.g., "Agentive Solutions") — Page ke saath **Page ID** bhi dikhegi (ye number note karo — API ke liye chahiye)
+3. Page select karo
+4. **"Connected assets"** tab pe jao
+5. **"Connect assets"** click karo
+6. Apna App select karo
 
-**Result:** App Business Portfolio se connected.
+**Result:** App Business Portfolio se connected. Page ID bhi mil gayi.
 
 ---
 
@@ -2551,7 +2557,7 @@ The `fte-facebook` MCP server exposes 5 tools:
 
 3. **"Add People"** click karo
 
-4. **"Instagram Tester"** role select karo **Add People** per click karo aur **Instagram Tester** select karo.
+4. **"Instagram Tester"** role select karo
 
 5. Instagram username type karo: `{your_instagram_username}`
 
@@ -2561,7 +2567,7 @@ The `fte-facebook` MCP server exposes 5 tools:
 
 1. **Instagram App** open karo phone pe
 
-2. **Settings and privacy** → **website_permissions** → **"Apps and Websites"**
+2. **Settings and privacy** → **"Apps and Websites"**
 
 3. **"Tester Invites"** tab mein **"FTE Social Manager-IG"** dikhega
 
@@ -2586,21 +2592,22 @@ The `fte-facebook` MCP server exposes 5 tools:
 
 **Pehle: Page ID Kahan Se Milegi?**
 
-1. **Business Settings se (RECOMMENDED):**
-   - Browser mein jao: **business.facebook.com/settings/**
-   - Left side mein **"Accounts"** → **"Pages"** click karo
-   - Apna Page select karo → **Page ID** wahan dikhega
+> **⚠️ IMPORTANT:** Facebook mein **2 tarah ki Page IDs** hoti hain. API ke liye sirf **Business Portfolio Page ID** kaam karti hai.
+>
+> | ID Type | Example | API mein kaam? |
+> |---|---|---|
+> | URL ID (browser bar mein) | `61583573918121` | ❌ NAHI |
+> | **Business Portfolio Page ID** | `1044367502088758` | ✅ HAAN |
 
-2. **Facebook Page URL se:**
-   - Apna Facebook Page kholo browser mein
-   - URL dekho: `facebook.com/profile.php?id=61583573918121`
-   - **⚠️ WARNING:** Ye "New Pages Experience ID" hai — ye API ke liye kaam **NAHI** kar sakta
-   - Business Portfolio Page ID use karo (Method 1 se milegi)
+**Business Portfolio Page ID nikalne ka tareeqa:**
 
-3. **Graph API Explorer se:**
-   - Browser: **developers.facebook.com/tools/explorer/**
-   - GET mode mein likho: `me/accounts`
-   - Submit karo → Response mein Page ka `id` aur `name` dikhega
+1. Browser mein jao: **business.facebook.com/settings/**
+2. **"Select business"** page khulega — agar multiple Business Portfolios hain toh wo wala select karo jismein tumhare Pages hain (e.g., jo "2 Pages" dikhaye)
+3. Business Settings khulne ke baad, left side mein **"Pages"** click karo
+4. Apna Page dikhega (e.g., "Agentive Solutions") — Page ke saath **numeric Page ID** dikhegi
+5. **Ye ID copy karo** — yehi API ke liye use hogi
+
+> **⚠️ NOTE:** `me/accounts` Graph API Explorer mein try mat karo — New Pages Experience mein ye empty `{"data": []}` return karta hai. Business Settings se Page ID nikalna sabse reliable tareeqa hai.
 
 **Ab Instagram Business Account ID Nikalo:**
 
