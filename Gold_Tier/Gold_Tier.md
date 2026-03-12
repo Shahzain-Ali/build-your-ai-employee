@@ -2205,25 +2205,46 @@ Test each component before moving to next.
 - Direct Page ID se query karne pe "does not exist or missing permissions" error aata tha
 - Token generate hota tha lekin Page access nahi milta tha
 
-**Solution — App Ko Business Portfolio Se Connect Karo:**
+**Solution — Step by Step:**
+
+**Part A: Business Portfolio Settings Kholna**
 
 1. Browser mein jao: **business.facebook.com/settings/**
 2. **"Select business"** page khulega — agar multiple Business Portfolios hain toh wo wala select karo jismein Pages hain (e.g., "Bangash110 · 2 Pages · 2 People")
-3. Business Settings khulne ke baad, left side mein **"Accounts"** → **"Apps"** click karo
-4. **"+ Add"** click karo
-5. Apna **App ID** paste karo (developers.facebook.com → App Dashboard → Settings → Basic se copy karo)
-6. App add ho jayegi
 
-**Page Ko App Se Connect Karo:**
+**Part B: Page Ko Business Portfolio Mein Add Karna**
+
+> **⚠️ NOTE:** Agar Pages section mein tumhara Page already dikh raha hai toh ye step skip karo aur Part C pe jao.
+
+1. Left side mein **"Accounts"** → **"Pages"** click karo
+2. Agar Page nahi dikh raha toh **"+ Add"** click karo
+3. **"Add an existing Facebook Page"** select karo (pehla option)
+4. Apna Page search karo (e.g., "Agentive Solutions")
+5. Page select karo → **"Next"** click karo
+6. Agar Instagram connected hai toh Instagram login popup aayega — login karo
+   - **Agar "Invalid redirect URI" error aaye** toh pehle ye karo:
+     - **developers.facebook.com** → Apna App → **"Facebook Login for Business"** → **"Settings"**
+     - **"Valid OAuth Redirect URIs"** mein `https://business.facebook.com/` add karo
+     - **Save** karo → Phir wapis yahan aake dobara try karo
+7. **"Request approval"** step aayega → Complete karo
+8. Page add ho jayega — **Page ID** bhi dikhegi (ye number note karo — API ke liye chahiye)
+
+**Part C: App Ko Business Portfolio Se Connect Karna**
+
+1. Left side mein **"Accounts"** → **"Apps"** click karo
+2. **"+ Add"** click karo
+3. Apna **App ID** paste karo (developers.facebook.com → App Dashboard → **"App settings"** → **"Basic"** se copy karo)
+4. App add ho jayegi
+
+**Part D: Page Ko App Se Connect Karna**
 
 1. Left side mein **"Pages"** click karo
-2. Apna **Page** dikhega (e.g., "Agentive Solutions") — Page ke saath **Page ID** bhi dikhegi (ye number note karo — API ke liye chahiye)
-3. Page select karo
-4. **"Connected assets"** tab pe jao
-5. **"Connect assets"** click karo
-6. Apna App select karo
+2. Apna **Page** select karo (e.g., "Agentive Solutions")
+3. **"Connected assets"** tab pe jao
+4. **"Connect assets"** click karo
+5. Apna App select karo (e.g., "FTE Social Manager")
 
-**Result:** App Business Portfolio se connected. Page ID bhi mil gayi.
+**Result:** Page + App + Instagram sab Business Portfolio se connected. Page ID bhi mil gayi.
 
 ---
 
