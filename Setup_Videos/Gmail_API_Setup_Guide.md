@@ -1,7 +1,7 @@
 # Gmail API — Complete Setup Guide
 
 **Date:** 2026-03-20
-**Author:** Shahzain Bangash + Claude Opus 4.6
+**Author:** Shahzain Ali + Claude Opus 4.6
 **Status:** FULLY WORKING — Read, Send, Modify Emails via Gmail API
 
 ---
