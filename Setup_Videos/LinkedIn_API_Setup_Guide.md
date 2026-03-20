@@ -8,58 +8,37 @@
 
 ## Table of Contents
 
-- [LinkedIn Official API — Complete Setup Guide](#linkedin-official-api--complete-setup-guide)
-  - [Table of Contents](#table-of-contents)
-  - [1. Prerequisites](#1-prerequisites)
-  - [2. Token Type — Quick Summary](#2-token-type--quick-summary)
-  - [3. LinkedIn Page Create Karna](#3-linkedin-page-create-karna)
-  - [4. Developer App Create Karna](#4-developer-app-create-karna)
-  - [5. App Permissions (Products) Enable Karna](#5-app-permissions-products-enable-karna)
-    - [Verify Permissions:](#verify-permissions)
-  - [6. Client Credentials + Redirect URLs](#6-client-credentials--redirect-urls)
-    - [Credentials Note Karo:](#credentials-note-karo)
-    - [Redirect URLs Configure Karo:](#redirect-urls-configure-karo)
-  - [7. Access Token Generate Karna (OAuth 2.0)](#7-access-token-generate-karna-oauth-20)
-    - [Method A: LinkedIn Developer Tools (Easiest — Recommended)](#method-a-linkedin-developer-tools-easiest--recommended)
-    - [Method B: Manual OAuth Flow (For Production)](#method-b-manual-oauth-flow-for-production)
-  - [8. Person URN Find Karna](#8-person-urn-find-karna)
-  - [9. Organization URN Find Karna](#9-organization-urn-find-karna)
-  - [10. LinkedIn Pe Post Karna (API Test)](#10-linkedin-pe-post-karna-api-test)
-    - [Quick Test via curl:](#quick-test-via-curl)
-    - [Expected Response:](#expected-response)
-    - [Test via Dashboard:](#test-via-dashboard)
-  - [11. Token Renewal — Kab Aur Kaise](#11-token-renewal--kab-aur-kaise)
-    - [LinkedIn Access Token](#linkedin-access-token)
-    - [Renewal Process (har 50 din):](#renewal-process-har-50-din)
-    - [Token Expiry Check:](#token-expiry-check)
-  - [12. .env Configuration](#12-env-configuration)
-  - [13. What You Can Post — Content Types](#13-what-you-can-post--content-types)
-  - [14. API Endpoints Quick Reference](#14-api-endpoints-quick-reference)
-    - [Rate Limits](#rate-limits)
-  - [15. Troubleshooting](#15-troubleshooting)
-    - [Token Errors](#token-errors)
-    - [Permission Errors](#permission-errors)
-    - [Posting Errors](#posting-errors)
-  - [16. Checklist — Setup Complete?](#16-checklist--setup-complete)
-    - [Prerequisites](#prerequisites)
-    - [Accounts](#accounts)
-    - [Permissions](#permissions)
-    - [Token + IDs](#token--ids)
-    - [Configuration](#configuration)
+1. [Prerequisites](#1-prerequisites)
+2. [Token Type — Quick Summary](#2-token-type--quick-summary)
+3. [LinkedIn Page Create Karna](#3-linkedin-page-create-karna)
+4. [Developer App Create Karna](#4-developer-app-create-karna)
+5. [App Permissions (Products) Enable Karna](#5-app-permissions-products-enable-karna)
+6. [Client Credentials + Redirect URLs](#6-client-credentials--redirect-urls)
+7. [Access Token Generate Karna (OAuth 2.0)](#7-access-token-generate-karna-oauth-20)
+8. [Person URN Find Karna](#8-person-urn-find-karna)
+9. [Organization URN Find Karna](#9-organization-urn-find-karna)
+10. [LinkedIn Pe Post Karna (API Test)](#10-linkedin-pe-post-karna-api-test)
+11. [Token Renewal — Kab Aur Kaise](#11-token-renewal--kab-aur-kaise)
+12. [.env Configuration](#12-env-configuration)
+13. [What You Can Post — Content Types](#13-what-you-can-post--content-types)
+14. [API Endpoints Quick Reference](#14-api-endpoints-quick-reference)
+15. [Troubleshooting](#15-troubleshooting)
+16. [Checklist — Setup Complete?](#16-checklist--setup-complete)
 
 ---
 
 ## 1. Prerequisites
 
-Ye sab **pehle se ready** hona chahiye — is video mein ye nahi banayenge:
+Ye sab **pehle se ready** hona chahiye:
 
 | # | Requirement | Notes |
 |---|------------|-------|
 | 1 | LinkedIn personal account | Login ke liye (already hoga) |
-| 2 | **LinkedIn Company Page** (already created) — optional | Agar company page pe post karna hai toh pehle bana ke aao |
-| 3 | Desktop browser | Chrome/Edge recommended |
+| 2 | Desktop browser | Chrome/Edge recommended |
 
-> **Note:** LinkedIn Page banana aapko **khud pehle se** karna hai. Is guide mein hum sirf **API access, Token generation, aur Posting** cover karenge.
+> **LinkedIn Company Page** zaroori hai Developer App banane ke liye — lekin **pehle se banana zaroori nahi.** App creation form mein **"+ Create a new LinkedIn Page"** ka option hota hai, wahi pe bana sakte ho (Step 4 mein dikhayenge).
+>
+> **Posting ke liye Page zaroori nahi** — `w_member_social` scope se aap **personal profile** pe post kar sakte ho. Page sirf app creation ke liye chahiye.
 
 **Is guide mein hum ye karenge:**
 
@@ -67,8 +46,10 @@ Ye sab **pehle se ready** hona chahiye — is video mein ye nahi banayenge:
 |------|----------------|
 | Developer App | Step 4 |
 | Permissions enable | Step 5 |
+| Client Credentials + Redirect URLs | Step 6 |
 | Access Token (60 days) | Step 7 |
 | Person URN find karna | Step 8 |
+| Organization URN find karna (optional) | Step 9 |
 | LinkedIn pe post karna | Step 10 |
 
 **Cost:** Sab kuch **100% free** hai. Koi payment nahi lagti.
