@@ -1,55 +1,28 @@
 # Gmail API — Complete Setup Guide
 
 **Date:** 2026-03-20
-**Author:** Shahzain Ali + Claude Opus 4.6
+**Author:** Shahzain Bangash + Claude Opus 4.6
 **Status:** FULLY WORKING — Read, Send, Modify Emails via Gmail API
 
 ---
 
 ## Table of Contents
 
-- [Gmail API — Complete Setup Guide](#gmail-api--complete-setup-guide)
-  - [Table of Contents](#table-of-contents)
-  - [1. Prerequisites](#1-prerequisites)
-  - [2. Token Type — Quick Summary](#2-token-type--quick-summary)
-  - [3. Google Cloud Project Create Karna](#3-google-cloud-project-create-karna)
-  - [4. Gmail API Enable Karna](#4-gmail-api-enable-karna)
-  - [5. OAuth Consent Screen Configure Karna](#5-oauth-consent-screen-configure-karna)
-    - [5.1 — Screen Create Karo](#51--screen-create-karo)
-    - [5.2 — Details Fill Karo](#52--details-fill-karo)
-    - [5.3 — Scopes Add Karo](#53--scopes-add-karo)
-    - [5.4 — Test Users Add Karo](#54--test-users-add-karo)
-  - [6. OAuth Client Credentials Create Karna](#6-oauth-client-credentials-create-karna)
-    - [Credentials Download Karo:](#credentials-download-karo)
-  - [7. First-Time Authorization (Token Generate Karna)](#7-first-time-authorization-token-generate-karna)
-    - [Step 1: Install Library](#step-1-install-library)
-    - [Step 2: Script Banao](#step-2-script-banao)
-    - [Step 3: Run Karo](#step-3-run-karo)
-    - [Alternative: Via FTE Command (Agar hamara project use kar rahe ho)](#alternative-via-fte-command-agar-hamara-project-use-kar-rahe-ho)
-    - [Method C: Manual Code Exchange (Agar MismatchingStateError Aaye)](#method-c-manual-code-exchange-agar-mismatchingstateerror-aaye)
-  - [8. Verify Token Working Hai](#8-verify-token-working-hai)
-    - [Expected Output:](#expected-output)
-  - [9. Test Email Send Karna](#9-test-email-send-karna)
-    - [Via Dashboard:](#via-dashboard)
-    - [Via Terminal:](#via-terminal)
-    - [Via MCP Tool (Claude Code):](#via-mcp-tool-claude-code)
-  - [10. Token Lifecycle — Auto-Refresh Kaise Kaam Karta Hai](#10-token-lifecycle--auto-refresh-kaise-kaam-karta-hai)
-  - [11. .env Configuration](#11-env-configuration)
-    - [Files in `.secrets/`:](#files-in-secrets)
-  - [12. What You Can Do — Email Operations](#12-what-you-can-do--email-operations)
-    - [Email Flow in FTE System:](#email-flow-in-fte-system)
-  - [13. API Scopes Quick Reference](#13-api-scopes-quick-reference)
-  - [14. Troubleshooting](#14-troubleshooting)
-    - [Token Errors](#token-errors)
-    - [Permission Errors](#permission-errors)
-    - [Setup Errors](#setup-errors)
-  - [15. Checklist — Setup Complete?](#15-checklist--setup-complete)
-    - [Google Cloud Setup](#google-cloud-setup)
-    - [Credentials](#credentials)
-    - [Authorization](#authorization)
-    - [Testing](#testing)
-    - [Configuration](#configuration)
-    - [No Manual Renewal Needed!](#no-manual-renewal-needed)
+1. [Prerequisites](#1-prerequisites)
+2. [Token Type — Quick Summary](#2-token-type--quick-summary)
+3. [Google Cloud Project Create Karna](#3-google-cloud-project-create-karna)
+4. [Gmail API Enable Karna](#4-gmail-api-enable-karna)
+5. [OAuth Consent Screen Configure Karna](#5-oauth-consent-screen-configure-karna)
+6. [OAuth Client Credentials Create Karna](#6-oauth-client-credentials-create-karna)
+7. [First-Time Authorization (Token Generate Karna)](#7-first-time-authorization-token-generate-karna)
+8. [Verify Token Working Hai](#8-verify-token-working-hai)
+9. [Test Email Send Karna](#9-test-email-send-karna)
+10. [Token Lifecycle — Auto-Refresh Kaise Kaam Karta Hai](#10-token-lifecycle--auto-refresh-kaise-kaam-karta-hai)
+11. [.env Configuration](#11-env-configuration)
+12. [What You Can Do — Email Operations](#12-what-you-can-do--email-operations)
+13. [API Scopes Quick Reference](#13-api-scopes-quick-reference)
+14. [Troubleshooting](#14-troubleshooting)
+15. [Checklist — Setup Complete?](#15-checklist--setup-complete)
 
 ---
 
@@ -81,7 +54,7 @@ Ye sab **pehle se ready** hona chahiye — is video mein ye nahi banayenge:
 
 ## 2. Token Type — Quick Summary
 
-Gmail ka token **ek baar setup karo.** System khud refresh karta hai, manually kuch karna nahi padta.
+Gmail ka token **ek baar setup karo — phir bhool jao.** System khud refresh karta hai, manually kuch karna nahi padta.
 
 **Sirf tab dobara setup (Step 7) karna padta hai jab:**
 - Google account ka password change karo
@@ -321,56 +294,16 @@ print('SUCCESS: Token saved!')
 
 ---
 
-## 8. Verify Token Working Hai
+## 8. Done — Kya Mila?
 
-```bash
-uv run python -c "
-from dotenv import load_dotenv; load_dotenv('.env')
-import os
-from google.oauth2.credentials import Credentials
-from google.auth.transport.requests import Request
-from googleapiclient.discovery import build
-token_path = os.getenv('GMAIL_TOKEN_PATH', '.secrets/gmail_token.json')
-creds = Credentials.from_authorized_user_file(token_path)
-if creds.expired and creds.refresh_token:
-    creds.refresh(Request())
-service = build('gmail', 'v1', credentials=creds)
-profile = service.users().getProfile(userId='me').execute()
-print('Gmail connected:', profile.get('emailAddress'))
-print('Total messages:', profile.get('messagesTotal'))
-"
-```
+Setup complete! Ab aapke paas ye **2 files** hain:
 
-### Expected Output:
-```
-Gmail connected: your@gmail.com
-Total messages: 12345
-```
+| File | Kya Hai | Kaise Mili |
+|------|---------|-----------|
+| `credentials.json` | App ka ID card | Google Cloud se download kiya (Step 6) |
+| `token.json` | User ki permission | Script run karke generate kiya (Step 7) |
 
-**Gmail API fully working ✅**
-
----
-
-## 9. Test Email Send Karna
-
-### Via Dashboard:
-
-1. Dashboard start karo: `uv run python -m src.main dashboard`
-2. **Communications** tab pe jao
-3. **"Compose New Email"** pe click karo
-4. To, Subject, Body fill karo
-5. **"Send Email"** click karo
-
-### Via Terminal:
-
-```bash
-uv run python -c "
-from dotenv import load_dotenv; load_dotenv('.env')
-from src.utils.email_sender import send_email
-result = send_email('your@gmail.com', 'Test from FTE', 'Hello from AI Employee!')
-print('Sent! ID:', result.get('id'))
-"
-```
+**In 2 files se aap Gmail API ka kuch bhi kar sakte ho** — emails read karo, send karo, mark as read karo. Ye files apne kisi bhi project mein use karo — AI agent, chatbot, automation, kuch bhi.
 
 ### Via MCP Tool (Claude Code):
 
