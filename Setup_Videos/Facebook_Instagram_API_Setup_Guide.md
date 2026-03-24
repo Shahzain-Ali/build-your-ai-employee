@@ -89,7 +89,7 @@ Facebook aur Instagram dono tokens use karte hain. Ye samajhna zaroori hai pehle
 
 | Field | Example | Notes |
 |-------|---------|-------|
-| **Page Name** | Agentive Solutions | Business ya brand ka naam |
+| **Page Name** | My Tech Company | Business ya brand ka naam |
 | **Category** | Science & Technology | Dropdown se select karo |
 | **Bio** | AI-Powered Automation Solutions | Short description (optional) |
 
@@ -805,5 +805,5 @@ Parameters:
 
 ---
 
-*Guide created for Agentive Solutions — AI Employee as a Service*
+*Guide created for AI Employee as a Service*
 *Last updated: 2026-03-20*

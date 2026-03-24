@@ -77,10 +77,9 @@ Ye sab **pehle se ready** hona chahiye:
 
 **Time:** 5 minutes
 
-1. LinkedIn open karo: **linkedin.com**
-2. Top bar mein **"For Business"** dropdown pe click karo
-3. **"Create a Company Page"** select karo
-4. Page type select karo:
+1. Browser mein jao: **https://www.linkedin.com/company/setup/new**
+   - Ya LinkedIn open karo → Top bar mein **"For Business"** (ya **"+"** icon) → **"Create a Company Page"**
+2. Page type select karo:
 
 | Type | Best For |
 |------|----------|
@@ -89,20 +88,20 @@ Ye sab **pehle se ready** hona chahiye:
 | Showcase page | Sub-brand |
 | Educational institution | School/university |
 
-5. Page details fill karo:
+3. Page details fill karo:
 
 | Field | Example | Notes |
 |-------|---------|-------|
-| **Name** | Agentive Solutions | Company ka naam |
-| **LinkedIn public URL** | agentive-solutions | Auto-generate, customize kar sakte ho |
-| **Website** | https://agentive.solutions | Optional |
+| **Name** | My Tech Company | Company ka naam |
+| **LinkedIn public URL** | my-tech-company | Auto-generate, customize kar sakte ho |
+| **Website** | https://mytechcompany.com | Optional |
 | **Industry** | Technology, Information and Internet | Dropdown se select karo |
 | **Organization size** | 2-10 employees | Ya "0-1" agar solo ho |
 | **Organization type** | Sole Proprietorship | Solo founder ke liye |
 | **Tagline** | AI-Powered Automation Solutions | Short description |
 
-6. Checkbox tick karo: "I verify that I am an authorized representative..."
-7. **"Create page"** click karo
+4. Checkbox tick karo: "I verify that I am an authorized representative..."
+5. **"Create page"** click karo
 
 **Result:** LinkedIn Page ban gaya ✅
 
@@ -118,9 +117,9 @@ Ye sab **pehle se ready** hona chahiye:
 
 | Field | Value | Notes |
 |-------|-------|-------|
-| **App name** | Agentive Solutions App | Descriptive naam |
-| **LinkedIn Page** | Agentive Solutions | Step 3 mein banayi gayi page select karo |
-| **Privacy policy URL** | https://agentive.solutions/privacy | Optional for development |
+| **App name** | My Tech Company App | Descriptive naam |
+| **LinkedIn Page** | My Tech Company | Dropdown se select karo — agar page nahi hai toh **"+ Create a new LinkedIn Page"** pe click karke wahi bana lo |
+| **Privacy policy URL** | https://mytechcompany.com/privacy | Optional for development |
 | **App logo** | Upload logo | Required — 100x100 minimum |
 
 4. **"Create app"** click karo
@@ -140,8 +139,8 @@ Ye sab **pehle se ready** hona chahiye:
 | **Sign In with LinkedIn using OpenID Connect** | Profile info access | Instant approval |
 | Community Management API | Comments, likes | May need review |
 
-3. Har product ke Terms accept karo
-4. Wait karo — kuch instantly approve, kuch mein 1-2 din
+3. Har product ke Terms accept karo aur **"Request access"** click karo
+4. Wait karo — kuch instantly approve, kuch mein 1-2 din lag sakte hain
 
 ### Verify Permissions:
 
@@ -180,6 +179,8 @@ http://localhost:8080/callback
 https://www.linkedin.com/developers/tools/oauth/redirect
 ```
 
+> **"Update"** ya **"Save"** button click karna mat bhoolo — warna redirect URLs save nahi honge!
+
 ---
 
 ## 7. Access Token Generate Karna (OAuth 2.0)
@@ -188,7 +189,7 @@ https://www.linkedin.com/developers/tools/oauth/redirect
 
 **Time:** 2 minutes
 
-1. Jao: **linkedin.com/developers/tools/oauth**
+1. Jao: **https://www.linkedin.com/developers/tools/oauth**
 2. Apni app select karo
 3. **Scopes** mein select karo:
    - ✅ `openid`
@@ -213,10 +214,10 @@ https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=YOU
 
 Allow karne ke baad redirect hoga:
 ```
-http://localhost:8080/callback?code=AUTHORIZATION_CODE_HERE
+http://localhost:8080/callback?code=AUTHORIZATION_CODE_HERE&state=...
 ```
 
-`code` parameter copy karo.
+URL mein se `code=` ke baad aur `&` se pehle wala part copy karo — ye tumhara **Authorization Code** hai.
 
 **Step 2: Code ko Token mein Exchange Karo**
 
@@ -246,7 +247,7 @@ Response:
 
 > Person URN tumhara personal LinkedIn ID hai. **Personal profile pe post karne ke liye ye chahiye.**
 
-Token milne ke baad ye API call karo:
+**Step 7 se mila hua Access Token** yahan use karo — `YOUR_ACCESS_TOKEN` ki jagah paste karo:
 
 ```bash
 curl -s "https://api.linkedin.com/v2/userinfo" \
@@ -272,18 +273,23 @@ Response:
 
 > Organization URN tumhara Company Page ID hai. **Page pe post karne ke liye ye chahiye** (optional).
 
+**Method 1 — Page Admin URL se (Easiest):**
 1. Apni LinkedIn Company Page open karo browser mein
-2. `Ctrl+U` press karo (View Page Source)
-3. `Ctrl+F` press karo aur search karo: `urn:li:organization:`
-4. Number copy karo
+2. URL bar mein dekho — kuch aisa hoga: `linkedin.com/company/112495928/`
+3. Number copy karo — ye tumhara Organization ID hai
+
+**Method 2 — Page Source se:**
+1. Company Page pe `Ctrl+U` press karo (View Page Source)
+2. `Ctrl+F` se search karo: `urn:li:organization:`
+3. Number copy karo
 
 **Example:** `urn:li:organization:112495928`
-
-> **Alternative:** Page URL se bhi mil sakta hai: `linkedin.com/company/112495928/`
 
 ---
 
 ## 10. LinkedIn Pe Post Karna (API Test)
+
+> **2 values replace karo** command mein: `YOUR_ACCESS_TOKEN` (Step 7 se) aur `YOUR_PERSON_ID` (Step 8 se)
 
 ### Quick Test via curl:
 
@@ -337,7 +343,7 @@ curl -X POST "https://api.linkedin.com/v2/ugcPosts" \
 
 ### Renewal Process (har 50 din):
 
-1. Jao: **linkedin.com/developers/tools/oauth**
+1. Jao: **https://www.linkedin.com/developers/tools/oauth**
 2. Apni app select karo
 3. Same scopes select karo (openid, profile, email, w_member_social)
 4. **"Request access token"** click karo
@@ -497,5 +503,5 @@ LINKEDIN_ORGANIZATION_URN=urn:li:organization:your_org_id
 
 ---
 
-*Guide created for Agentive Solutions — AI Employee as a Service*
-*Last updated: 2026-03-20*
+*Guide created for My Tech Company — AI Employee as a Service*
+*Last updated: 2026-03-24*

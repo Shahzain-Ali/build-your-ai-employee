@@ -398,5 +398,5 @@ GMAIL_TOKEN_PATH=.secrets/gmail_token.json
 
 ---
 
-*Guide created for Agentive Solutions — AI Employee as a Service*
+*Guide created for AI Employee as a Service*
 *Last updated: 2026-03-24*
