@@ -121,16 +121,19 @@ Gmail ka token **ek baar setup karo — phir bhool jao.** System khud refresh ka
 ### 5.1 — Screen Create Karo
 
 1. **"APIs & Services"** → **"OAuth consent screen"**
-2. User Type select karo:
+2. **"Get Started"** ya **"Configure Consent Screen"** button click karo (jo bhi dikhe)
+3. User Type select karo:
 
 | Type | Use Case |
 |------|----------|
 | **External** | Testing ke liye (most cases — ye select karo) |
 | Internal | Sirf Google Workspace accounts ke liye |
 
-3. **"Create"** click karo
+4. **"Create"** click karo
 
 ### 5.2 — Details Fill Karo
+
+1. **"App Information"** section mein ye fill karo:
 
 | Field | Value | Notes |
 |-------|-------|-------|
@@ -138,12 +141,13 @@ Gmail ka token **ek baar setup karo — phir bhool jao.** System khud refresh ka
 | **User support email** | apni email | Required |
 | **Developer contact email** | apni email | Required |
 
-4. **"Save and Continue"** click karo
+2. **"Save and Continue"** click karo
 
 ### 5.3 — Scopes Add Karo
 
-1. **"Add or Remove Scopes"** click karo
-2. Ye scopes search karo aur select karo:
+1. OAuth consent screen mein **"Data Access"** tab/section pe jao
+2. **"Add or Remove Scopes"** click karo
+3. Ye scopes search karo aur select karo:
 
 | Scope | Purpose |
 |-------|---------|
@@ -151,13 +155,14 @@ Gmail ka token **ek baar setup karo — phir bhool jao.** System khud refresh ka
 | `https://www.googleapis.com/auth/gmail.modify` | Emails mark as read |
 | `https://www.googleapis.com/auth/gmail.send` | Emails send karna |
 
-3. **"Update"** → **"Save and Continue"**
+4. **"Update"** → **"Save and Continue"**
 
 ### 5.4 — Test Users Add Karo
 
-1. **"Add Users"** click karo
-2. Apni Gmail address add karo (e.g., `your@gmail.com`)
-3. **"Save and Continue"**
+1. **"Audience"** section/tab pe jao (ya "Test Users" agar dikhe)
+2. **"Add Users"** click karo
+3. Apni Gmail address add karo (e.g., `your@gmail.com`)
+4. **"Save"** ya **"Save and Continue"** click karo
 
 > **Testing Mode:** Jab tak app "In Production" na ho, sirf test users hi use kar sakte hain. Personal use ke liye testing mode kaafi hai.
 
@@ -230,17 +235,17 @@ SCOPES = [
 ]
 
 flow = InstalledAppFlow.from_client_secrets_file(
-    "credentials.json",  # Google Cloud se download ki hui file (Step 6)
+    "gmail_credentials.json",  # Google Cloud se download ki hui file (Step 6)
     SCOPES,
 )
 
 creds = flow.run_local_server(port=0)
 
 # Token save karo
-with open("token.json", "w") as f:
+with open("gmail_token.json", "w") as f:
     f.write(creds.to_json())
 
-print("Token saved to token.json!")
+print("Token saved to gmail_token.json!")
 ```
 
 ### Step 3: Run Karo
@@ -249,16 +254,16 @@ print("Token saved to token.json!")
 python gmail_token_setup.py
 ```
 
-> **Note:** `credentials.json` (Step 6 mein download ki hui) same folder mein honi chahiye jahan script hai.
+> **Note:** `gmail_credentials.json` (Step 6 mein download aur rename ki hui) same folder mein honi chahiye jahan script hai.
 
 **Kya hoga:**
 1. Browser **automatically** open hoga
 2. Google account select karo
 3. **"Allow"** pe click karo — sab permissions accept karo
 4. Browser mein dikhega: **"The authentication flow has completed."**
-5. Token automatically **`token.json`** mein save ho jayega
+5. Token automatically **`gmail_token.json`** mein save ho jayega
 
-**Result:** `token.json` ban gaya — ab is token se emails read, send, sab kar sakte ho ✅
+**Result:** `gmail_token.json` ban gaya — ab is token se emails read, send, sab kar sakte ho ✅
 
 > **Ye script generic hai** — koi bhi apne project mein use kar sakta hai. AI agent, chatbot, automation — jahan bhi Gmail API chahiye.
 
@@ -394,4 +399,4 @@ GMAIL_TOKEN_PATH=.secrets/gmail_token.json
 ---
 
 *Guide created for Agentive Solutions — AI Employee as a Service*
-*Last updated: 2026-03-20*
+*Last updated: 2026-03-24*
