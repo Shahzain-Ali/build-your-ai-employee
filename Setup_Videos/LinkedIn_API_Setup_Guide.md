@@ -144,16 +144,14 @@ Ye sab **pehle se ready** hona chahiye:
 
 ### Verify Permissions:
 
-**"Auth"** tab mein check karo ke ye scopes available hain:
+**"Products"** tab mein check karo ke ye products **approved** hain:
 
-| Scope | Purpose | Required? |
-|-------|---------|-----------|
-| `openid` | Sign in with LinkedIn | ✅ Yes |
-| `profile` | Basic profile info | ✅ Yes |
-| `email` | Email address | Optional |
-| `w_member_social` | **Create posts on personal profile** | ✅ MANDATORY |
+| Product | Kaunsa Scope Milta Hai | Required? |
+|---------|----------------------|-----------|
+| **Share on LinkedIn** | `w_member_social` | ✅ MANDATORY — iske bina post nahi hoga |
+| **Sign In with LinkedIn using OpenID Connect** | `openid`, `profile`, `email` | ✅ Yes |
 
-> ⚠️ **`w_member_social`** sabse important hai — iske bina post nahi hoga!
+> ⚠️ Scopes **Auth tab mein nahi dikhte** — ye Products approve hone ke baad automatically available ho jate hain. Token generate karte waqt (Step 7) scopes select karoge.
 
 ---
 
@@ -161,14 +159,16 @@ Ye sab **pehle se ready** hona chahiye:
 
 ### Credentials Note Karo:
 
-**"Auth"** tab mein:
+**"Auth"** tab → **"Application credentials"** section mein:
 
 | Credential | Where to Find |
 |------------|--------------|
-| **Client ID** | Auth tab → Client ID |
-| **Client Secret** | Auth tab → Click eye icon |
+| **Client ID** | Directly dikhta hai — copy karo |
+| **Primary Client Secret** | Eye icon (👁) click karo dekhne ke liye, ya copy icon (📋) se copy karo |
 
 > ⚠️ **Client Secret kabhi public mat karo!**
+>
+> **"Generate a new Client Secret"** button bhi hota hai — agar purana secret kho gaya ho toh naya bana sakte ho.
 
 ### Redirect URLs Configure Karo:
 
