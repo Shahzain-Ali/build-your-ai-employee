@@ -87,7 +87,7 @@ ai-employee-blueprint/
 │   └── Silver_Tier.md    # Gmail, WhatsApp, MCP integration
 ├── Gold_Tier/
 │   └── Gold_Tier.md      # Autonomous decision making, CEO briefing
-└── Setup_Videos/         # Video guides
+└── API_Setup_Guides/     # API setup guides (Gmail, LinkedIn, Facebook/Instagram)
 ```
 
 ---
